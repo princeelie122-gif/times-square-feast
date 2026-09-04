@@ -1,3 +1,5 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { MapPin } from "lucide-react";
 import heroImage from "@/assets/hero-breakfast.jpg";
 import interior from "@/assets/interior.jpg";
 import { favorites } from "@/data/menu";
