@@ -1,5 +1,3 @@
-
-
 import heroImage from "@/assets/hero-breakfast.jpg";
 import interior from "@/assets/interior.jpg";
 import { favorites } from "@/data/menu";
@@ -21,6 +19,29 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+    ],
+    // Ensure the browser uses the repository favicon rather than an injected preview icon.
+    // The static <link rel="icon"> is already present in the root, but some editors/previews
+    // replace the tab icon after head is rendered. This small inline script forces any
+    // favicon link to /favicon.ico as early as possible.
+    scripts: [
+      {
+        type: "text/javascript",
+        children: `(function () {
+          try {
+            var href = '/favicon.ico';
+            var links = Array.from(document.querySelectorAll('link[rel~="icon"]'));
+            if (links.length) {
+              links.forEach(function (l) { l.href = href; });
+            } else {
+              var l = document.createElement('link');
+              l.rel = 'icon';
+              l.href = href;
+              document.head.appendChild(l);
+            }
+          } catch (e) { /* noop */ }
+        })();`,
+      },
     ],
   }),
   component: Home,
