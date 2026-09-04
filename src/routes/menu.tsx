@@ -25,8 +25,8 @@ export const Route = createFileRoute("/menu")({
 });
 
 function MenuPage() {
-  const [active, setActive] = useState(menu[0].id);
-  const category = menu.find((c) => c.id === active) ?? menu[0];
+  const [active, setActive] = useState(menu[0]!.id);
+  const category = menu.find((c) => c.id === active) ?? menu[0]!;
   const withPhotos = category.items.filter((i) => i.image);
   const rest = category.items.filter((i) => !i.image);
 
